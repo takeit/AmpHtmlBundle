@@ -1,0 +1,47 @@
+{
+    "name": "takeit/amp-html-bundle",
+    "type": "symfony-bundle",
+    "description": "This bundle provides AMP HTML integration to your Symfony projects.",
+    "keywords": ["amphtml", "amp-html", "amp", "google"],
+    "license":"MIT",
+    "minimum-stability": "dev",
+    "authors": [
+        {
+            "name": "Rafał Muszyński",
+            "email": "rmuszynski1@gmail.com"
+        }
+    ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/Lullabot/amp-library"
+        }
+    ],
+    "require": {
+        "php": ">=5.5|^7.0",
+        "lullabot/amp": "dev-master"
+    },
+    "require-dev": {
+        "phpspec/phpspec": "^2.4"
+    },
+    "autoload": {
+        "exclude-from-classmap": [
+            "Tests/",
+            "spec/"
+        ],
+        "psr-4": { "Takeit\\Bundle\\AmpHtmlBundle\\": "" }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Takeit\\Bundle\\AmpHtmlBundle\\spec\\": "spec/"
+        }
+    },
+    "config": {
+        "bin-dir": "bin"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1-dev"
+        }
+    }
+}

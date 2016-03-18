@@ -1,0 +1,4 @@
+takeit_amphtml_view:
+    path:      /{path}.amp
+    defaults:
+        _controller: TakeitAmpHtmlBundle:AmpView:view
