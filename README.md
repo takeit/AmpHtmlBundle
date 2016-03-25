@@ -1,7 +1,7 @@
 The AMP HTML ⚡ Bundle
 ======================
 
-This bundle aims to provide AMP HTML conversion to your Symfony2/Symfony3 projects. Based on [Lullabot/amp-library](https://github.com/Lullabot/amp-library).
+This bundle aims to provide [AMP HTML](https://www.ampproject.org) conversion to your Symfony2/Symfony3 projects. Based on [Lullabot/amp-library](https://github.com/Lullabot/amp-library).
 
 Installation
 ------------
@@ -15,7 +15,7 @@ php composer.phar require takeit/amp-html-bundle:0.1.*
 Documentation
 -------------
 
-Read the Documentation to learn more about this bundle.
+Read the Documentation (**comming soon!**) to learn more about this bundle.
 
 Contribute
 ----------
@@ -30,6 +30,9 @@ Authors
 
 * Rafał Muszyński ([takeit])
 * [The Community Contributors]
+
+This bundle has been created thanks to [The Google AMP project](https://www.ampproject.org), 
+[Lullabot/amp-library](https://github.com/Lullabot/amp-library) and some bottles of :beer: :laughing:
 
 License
 -------

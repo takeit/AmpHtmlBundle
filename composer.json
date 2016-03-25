@@ -1,7 +1,7 @@
 {
     "name": "takeit/amp-html-bundle",
     "type": "symfony-bundle",
-    "description": "This bundle provides AMP HTML integration to your Symfony projects.",
+    "description": "Provide AMP HTML conversion to your Symfony2/Symfony3 projects.",
     "keywords": ["amphtml", "amp-html", "amp", "google"],
     "license":"MIT",
     "minimum-stability": "dev",
