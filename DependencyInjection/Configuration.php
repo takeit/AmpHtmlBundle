@@ -17,7 +17,7 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 /**
  * This is the class that validates and merges configuration from your app/config files.
  *
- * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html#cookbook-bundles-extension-config-class}
+ * @author Rafał Muszyński <rmuszynski1@gmail.com>
  */
 class Configuration implements ConfigurationInterface
 {
@@ -27,7 +27,57 @@ class Configuration implements ConfigurationInterface
     public function getConfigTreeBuilder()
     {
         $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('takeit_amphtml');
+        $treeBuilder->root('takeit_amp_html')
+            ->addDefaultsIfNotSet()
+            ->children()
+                ->arrayNode('theme')
+                    ->isRequired()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('path')
+                            ->defaultValue('%kernel.root_dir%/Resources/amp/themes')
+                        ->end()
+                        ->scalarNode('current_theme')
+                            ->cannotBeEmpty()
+                            ->isRequired()
+                        ->end()
+                    ->end()
+                ->end()
+                ->arrayNode('routing')
+                    ->isRequired()
+                    ->addDefaultsIfNotSet()
+                    ->children()
+                        ->scalarNode('controller')
+                            ->defaultValue('takeit_amp_html.amp_controller:viewAction')
+                        ->end()
+                        ->scalarNode('prefix')
+                            ->defaultValue('/platform/amp')
+                        ->end()
+                        ->scalarNode('pattern')
+                            ->isRequired()
+                            ->cannotBeEmpty()
+                        ->end()
+                        ->scalarNode('parameter')
+                            ->cannotBeEmpty()
+                            ->defaultValue('slug')
+                        ->end()
+                        ->scalarNode('parameterRegex')
+                            ->defaultValue('.+')
+                            ->info('Parameter\'s regular expression.')
+                        ->end()
+                    ->end()
+                ->end()
+                ->scalarNode('model')
+                    ->cannotBeEmpty()
+                    ->isRequired()
+                    ->info('Fully qualified class name of your model.')
+                ->end()
+                ->scalarNode('converter')
+                    ->defaultValue('takeit_amp_html.amp_converter')
+                    ->info('Custom converter service id.')
+                ->end()
+            ->end()
+        ;
 
         return $treeBuilder;
     }

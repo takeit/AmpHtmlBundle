@@ -1,0 +1,12 @@
+parameters:
+    takeit_amp_html.amp_converter.class: Takeit\Bundle\AmpHtmlBundle\Converter\LullabotAmpConverter
+
+services:
+    takeit_amp_html.amp_base_converter:
+        class: Lullabot\AMP\AMP
+        public: false
+
+    takeit_amp_html.amp_converter:
+        class: %takeit_amp_html.amp_converter.class%
+        public: false
+        arguments: ["@takeit_amp_html.amp_base_converter"]

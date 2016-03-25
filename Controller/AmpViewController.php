@@ -11,13 +11,47 @@
 
 namespace Takeit\Bundle\AmpHtmlBundle\Controller;
 
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
 
+/**
+ * Renders AMP HTML compatible template.
+ *
+ * @author Rafał Muszyński <rmuszynski1@gmail.com>
+ */
 class AmpViewController
 {
-    public function viewAction(Request $request)
+    /**
+     * @var \Twig_environment
+     */
+    private $twig;
+
+    /**
+     * @var string
+     */
+    private $themeName;
+
+    /**
+     * @param \Twig_environment $twig
+     */
+    public function __construct(\Twig_environment $twig, $themeName)
     {
-        return new Response('amp controller');
+        $this->twig = $twig;
+        $this->themeName = $themeName;
+    }
+
+    /**
+     * @param AmpInterface $object
+     *
+     * @return Response
+     */
+    public function viewAction(AmpInterface $object)
+    {
+        $response = new Response();
+        $response->setContent($this->twig->render(sprintf('@amp_themes/%s/index.html.twig', $this->themeName), [
+            'object' => $object,
+        ]));
+
+        return $response;
     }
 }

@@ -9,15 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Takeit\Bundle\AmpHtmlBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace Takeit\Bundle\AmpHtmlBundle\Converter;
 
 /**
- * Class TakeitAmpHtmlBundle.
+ * AmpConverterInterface converts HTML to AMP HTML format.
  *
  * @author Rafał Muszyński <rmuszynski1@gmail.com>
  */
-class TakeitAmpHtmlBundle extends Bundle
+interface AmpConverterInterface
 {
+    /**
+     * Converts HTML to AMP HTML.
+     *
+     * @param $html HTML string
+     *
+     * @return string
+     */
+    public function convertToAmp($html);
 }

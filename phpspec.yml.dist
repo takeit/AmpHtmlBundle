@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: Takeit\Bundle\AmpHtmlBundle
+        psr4_prefix: Takeit\Bundle\AmpHtmlBundle
+        src_path: .

@@ -9,15 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Takeit\Bundle\AmpHtmlBundle;
-
-use Symfony\Component\HttpKernel\Bundle\Bundle;
+namespace Takeit\Bundle\AmpHtmlBundle\Model;
 
 /**
- * Class TakeitAmpHtmlBundle.
+ * Defines whether the model should be AMP-ified or not.
  *
  * @author Rafał Muszyński <rmuszynski1@gmail.com>
  */
-class TakeitAmpHtmlBundle extends Bundle
+interface AmpInterface
 {
 }
