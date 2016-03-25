@@ -1,5 +1,6 @@
 The AMP HTML ⚡ Bundle
 ======================
+[![Build Status](https://travis-ci.org/takeit/AmpHtmlBundle.svg?branch=master)](https://travis-ci.org/takeit/AmpHtmlBundle)
 
 This bundle aims to provide [AMP HTML](https://www.ampproject.org) conversion to your Symfony2/Symfony3 projects. Based on [Lullabot/amp-library](https://github.com/Lullabot/amp-library).
 
