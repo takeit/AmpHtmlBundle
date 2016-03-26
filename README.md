@@ -16,7 +16,7 @@ php composer.phar require takeit/amp-html-bundle:0.1.*
 Documentation
 -------------
 
-Read the Documentation (**comming soon!**) to learn more about this bundle.
+Read the Documentation (**coming soon!**) to learn more about this bundle.
 
 Contribute
 ----------
@@ -32,8 +32,12 @@ Authors
 * Rafał Muszyński ([takeit])
 * [The Community Contributors]
 
-This bundle has been created thanks to [The Google AMP project](https://www.ampproject.org), 
-[Lullabot/amp-library](https://github.com/Lullabot/amp-library) and some bottles of :beer: :laughing:
+This bundle is possible thanks to:
+
+* [The Google AMP project](https://www.ampproject.org)
+* [Lullabot/amp-library](https://github.com/Lullabot/amp-library)
+* [Symfony](http://symfony.com/)
+* some bottles of :beer: :laughing:
 
 License
 -------
