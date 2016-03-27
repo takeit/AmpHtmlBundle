@@ -1,7 +1,6 @@
 build: false
 platform:
   - x86
-  - x64
 clone_folder: c:\projects\amp-html-bundle
 
 cache:
@@ -10,6 +9,7 @@ cache:
 
 init:
   - SET PATH=c:\php;%PATH%
+  - SET COMPOSER_NO_INTERACTION=1
   - SET PHP=1
 
 install:
@@ -29,8 +29,8 @@ install:
   - appveyor DownloadFile https://getcomposer.org/composer.phar
   - cd c:\projects\amp-html-bundle
   - mkdir %APPDATA%\Composer
-  - composer update --prefer-dist --no-progress --ansi --no-interaction
+  - composer update --prefer-dist --no-progress --ansi
 
 test_script:
   - cd c:\projects\amp-html-bundle
-  - php bin\phpspec run -fpretty --verbose
+  - php bin\phpspec run -fpretty
