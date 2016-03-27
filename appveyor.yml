@@ -6,6 +6,7 @@ clone_folder: c:\projects\amp-html-bundle
 
 cache:
   - c:\tools\php -> appveyor.yml
+  - '%LOCALAPPDATA%\Composer'
 
 init:
   - SET PATH=c:\php;%PATH%
@@ -32,4 +33,4 @@ install:
 
 test_script:
   - cd c:\projects\amp-html-bundle
-  - vendor\bin\phpspec.bat run -fpretty --verbose
+  - php bin\phpspec run -fpretty --verbose
