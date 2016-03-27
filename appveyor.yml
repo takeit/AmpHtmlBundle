@@ -5,12 +5,10 @@ platform:
 clone_folder: c:\projects\amp-html-bundle
 
 cache:
-  #https://getcomposer.org/doc/03-cli.md#composer-cache-dir
-  - '%LOCALAPPDATA%\Composer\files'
   - c:\tools\php -> appveyor.yml
 
 init:
-  - SET PATH=C:\Program Files\OpenSSL;c:\tools\php;%PATH%
+  - SET PATH=c:\php;%PATH%
   - SET PHP=1
 
 install:
