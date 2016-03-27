@@ -30,7 +30,6 @@ install:
   - appveyor DownloadFile https://getcomposer.org/composer.phar
   - cd c:\projects\amp-html-bundle
   - mkdir %APPDATA%\Composer
-  - appveyor DownloadFile https://getcomposer.org/composer.phar
   - composer update --prefer-dist --no-progress --ansi --no-interaction
 
 test_script:
