@@ -1,6 +1,9 @@
 The AMP HTML ⚡ Bundle
 ======================
 [![Build Status](https://travis-ci.org/takeit/AmpHtmlBundle.svg?branch=master)](https://travis-ci.org/takeit/AmpHtmlBundle)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/takeit/AmpHtmlBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/takeit/AmpHtmlBundle/?branch=master)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/bb62274d-62c3-43b3-9326-d421079ba583/mini.png)](https://insight.sensiolabs.com/projects/bb62274d-62c3-43b3-9326-d421079ba583)
+[![Latest Stable Version](https://poser.pugx.org/takeit/amp-html-bundle/v/stable)](https://packagist.org/packages/takeit/amp-html-bundle) [![Total Downloads](https://poser.pugx.org/takeit/amp-html-bundle/downloads)](https://packagist.org/packages/takeit/amp-html-bundle) [![Latest Unstable Version](https://poser.pugx.org/takeit/amp-html-bundle/v/unstable)](https://packagist.org/packages/takeit/amp-html-bundle)
 
 This bundle aims to provide [AMP HTML](https://www.ampproject.org) conversion to your Symfony2/Symfony3 projects. Based on [Lullabot/amp-library](https://github.com/Lullabot/amp-library).
 
@@ -16,7 +19,7 @@ php composer.phar require takeit/amp-html-bundle:0.1.*
 Documentation
 -------------
 
-Read the Documentation (**comming soon!**) to learn more about this bundle.
+Read the Documentation (**coming soon!**) to learn more about this bundle.
 
 Contribute
 ----------
@@ -32,8 +35,12 @@ Authors
 * Rafał Muszyński ([takeit])
 * [The Community Contributors]
 
-This bundle has been created thanks to [The Google AMP project](https://www.ampproject.org), 
-[Lullabot/amp-library](https://github.com/Lullabot/amp-library) and some bottles of :beer: :laughing:
+This bundle is possible thanks to:
+
+* [The Google AMP project](https://www.ampproject.org)
+* [Lullabot/amp-library](https://github.com/Lullabot/amp-library)
+* [Symfony](http://symfony.com/)
+* some bottles of :beer: :laughing:
 
 License
 -------
