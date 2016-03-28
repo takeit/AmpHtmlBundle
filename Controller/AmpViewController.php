@@ -33,6 +33,7 @@ class AmpViewController
 
     /**
      * @param \Twig_environment $twig
+     * @param string            $themeName
      */
     public function __construct(\Twig_environment $twig, $themeName)
     {
