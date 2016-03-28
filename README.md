@@ -1,6 +1,7 @@
 The AMP HTML ⚡ Bundle
 ======================
 [![Build Status](https://travis-ci.org/takeit/AmpHtmlBundle.svg?branch=master)](https://travis-ci.org/takeit/AmpHtmlBundle)
+[![Build status](https://ci.appveyor.com/api/projects/status/r1lkh33adqg4hwq5?svg=true)](https://ci.appveyor.com/project/takeit/amphtmlbundle)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/takeit/AmpHtmlBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/takeit/AmpHtmlBundle/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/bb62274d-62c3-43b3-9326-d421079ba583/mini.png)](https://insight.sensiolabs.com/projects/bb62274d-62c3-43b3-9326-d421079ba583)
 [![Latest Stable Version](https://poser.pugx.org/takeit/amp-html-bundle/v/stable)](https://packagist.org/packages/takeit/amp-html-bundle) [![Total Downloads](https://poser.pugx.org/takeit/amp-html-bundle/downloads)](https://packagist.org/packages/takeit/amp-html-bundle) [![Latest Unstable Version](https://poser.pugx.org/takeit/amp-html-bundle/v/unstable)](https://packagist.org/packages/takeit/amp-html-bundle)
