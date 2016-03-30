@@ -44,6 +44,11 @@ class TakeitAmpHtmlExtension extends Extension
             );
         }
 
+        $container->setParameter(
+            $this->getAlias().'.configuration.theme.theme_path',
+            rtrim($config['theme']['themes_path'], '/').'/'.$config['theme']['current_theme']
+        );
+
         $container->setParameter($this->getAlias().'.configuration.model.class', $config['model']);
         $container->setParameter($this->getAlias().'.configuration.routing', $config['routing']);
     }

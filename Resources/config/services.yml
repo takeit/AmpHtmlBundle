@@ -6,24 +6,24 @@ parameters:
 
 services:
     takeit_amp_html.amp_subscriber:
-        class: %takeit_amp_html.amp_subscriber.class%
+        class: "%takeit_amp_html.amp_subscriber.class%"
         arguments: ["@takeit_amp_html.converter.amp"]
         tags:
             - { name: kernel.event_subscriber, priority: 30 }
 
     takeit_amp_html.amp_controller:
-        class: %takeit_amp_html.amp_controller.class%
-        arguments: ["@twig", "%takeit_amp_html.configuration.theme.current_theme%"]
+        class: "%takeit_amp_html.amp_controller.class%"
+        arguments: ["@twig"]
 
     takeit_amp_html.routing_loader:
-        class: %takeit_amp_html.routing_loader.class%
+        class: "%takeit_amp_html.routing_loader.class%"
         public: false
         arguments: ["%takeit_amp_html.configuration.routing%"]
         tags:
             - { name: routing.loader }
 
     takeit_amp_html.param_converter.resolve_entity_converter:
-        class: %takeit_amp_html.param_converter.resolve_entity_converter.class%
+        class: "%takeit_amp_html.param_converter.resolve_entity_converter.class%"
         public: false
         tags:
             - { name: request.param_converter, priority: 10, converter: doctrine.orm }

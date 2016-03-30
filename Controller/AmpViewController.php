@@ -27,18 +27,11 @@ class AmpViewController
     private $twig;
 
     /**
-     * @var string
-     */
-    private $themeName;
-
-    /**
      * @param \Twig_environment $twig
-     * @param string            $themeName
      */
-    public function __construct(\Twig_environment $twig, $themeName)
+    public function __construct(\Twig_environment $twig)
     {
         $this->twig = $twig;
-        $this->themeName = $themeName;
     }
 
     /**
@@ -49,7 +42,7 @@ class AmpViewController
     public function viewAction(AmpInterface $object)
     {
         $response = new Response();
-        $response->setContent($this->twig->render(sprintf('@amp_themes/%s/index.html.twig', $this->themeName), [
+        $response->setContent($this->twig->render(sprintf('@amp_theme/index.html.twig'), [
             'object' => $object,
         ]));
 

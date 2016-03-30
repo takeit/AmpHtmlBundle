@@ -26,7 +26,7 @@ class AmpViewControllerSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig)
     {
-        $this->beConstructedWith($twig, 'amp-theme');
+        $this->beConstructedWith($twig);
     }
 
     function it_is_initializable()
@@ -36,7 +36,7 @@ class AmpViewControllerSpec extends ObjectBehavior
     
     function it_should_render_amp_template(AmpInterface $ampObject, $twig)
     {
-        $twig->render(Argument::exact('@amp_themes/amp-theme/index.html.twig'), [
+        $twig->render(Argument::exact('@amp_theme/index.html.twig'), [
             'object' => $ampObject,
         ])->willReturn('<html><body>test html</body></html>');
 
