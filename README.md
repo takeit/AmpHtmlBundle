@@ -19,7 +19,7 @@ php composer.phar require takeit/amp-html-bundle:0.1.*
 Documentation
 -------------
 
-Read the Documentation (**coming soon!**) to learn more about this bundle.
+Read the [Documentation] to learn more about this bundle.
 
 Contribute
 ----------
@@ -52,3 +52,4 @@ This bundle is released under the [MIT license].
 [issue tracker]: https://github.com/takeit/AmpHtmlBundle/issues/issues
 [Git repository]: https://github.com/takeit/AmpHtmlBundle
 [MIT license]: LICENSE
+[Documentation]: Resources/doc/index.md
