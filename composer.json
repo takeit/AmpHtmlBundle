@@ -2,7 +2,7 @@
     "name": "takeit/amp-html-bundle",
     "type": "symfony-bundle",
     "description": "Provide AMP HTML conversion to your Symfony2/Symfony3 projects.",
-    "keywords": ["amphtml", "amp-html", "amp", "google"],
+    "keywords": ["amphtml", "amp-html", "amp", "google", "html"],
     "license":"MIT",
     "minimum-stability": "dev",
     "authors": [
@@ -18,10 +18,10 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0|^7.0",
+        "php": ">=5.5.9|^7.0",
         "lullabot/amp": "dev-master",
         "symfony/framework-bundle": "^2.3|^3.0",
-        "twig/twig": "^1.24"
+        "symfony/twig-bundle": "^2.3|^3.0"
     },
     "require-dev": {
         "phpspec/phpspec": "^2.4"
