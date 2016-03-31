@@ -3,6 +3,7 @@ parameters:
     takeit_amp_html.amp_controller.class: Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController
     takeit_amp_html.routing_loader.class: Takeit\Bundle\AmpHtmlBundle\Routing\Loader\AmpLoader
     takeit_amp_html.param_converter.resolve_entity_converter.class: Takeit\Bundle\AmpHtmlBundle\Request\ParamConverter\ResolveEntityParamConverter
+    takeit_amp_html.twig_extension.class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
 
 services:
     takeit_amp_html.amp_subscriber:
@@ -30,3 +31,10 @@ services:
         arguments:
             - {'Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface': "%takeit_amp_html.configuration.model.class%"}
             - "@?doctrine"
+
+    takeit_amp_html.twig_extension:
+        class: "%takeit_amp_html.twig_extension.class%"
+        public: false
+        arguments: ['%takeit_amp_html.configuration.routing%']
+        tags:
+            - { name: twig.extension }
