@@ -11,15 +11,9 @@
             "email": "rmuszynski1@gmail.com"
         }
     ],
-    "repositories": [
-        {
-            "type": "git",
-            "url": "https://github.com/Lullabot/amp-library"
-        }
-    ],
     "require": {
         "php": ">=5.5.9|^7.0",
-        "lullabot/amp": "dev-master",
+        "lullabot/amp": "1.0.*",
         "symfony/framework-bundle": "^2.3|^3.0",
         "symfony/twig-bundle": "^2.3|^3.0"
     },
