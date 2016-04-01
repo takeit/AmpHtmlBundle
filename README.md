@@ -7,6 +7,8 @@ The AMP HTML ⚡ Bundle
 
 This bundle aims to provide [AMP HTML](https://www.ampproject.org) conversion to your Symfony2/Symfony3 projects. Based on [Lullabot/amp-library](https://github.com/Lullabot/amp-library).
 
+![demo](http://i.imgur.com/yd37c3m.gif)
+
 Installation
 ------------
 
