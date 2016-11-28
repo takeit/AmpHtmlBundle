@@ -1,0 +1,8 @@
+services:
+    takeit_amp_html.amp_route_listener:
+        class: Takeit\Bundle\AmpHtmlBundle\EventListener\AmpRouteListener
+        arguments:
+            - '@controller_resolver'
+            - '%takeit_amp_html.configuration.routing.controller%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }

@@ -37,6 +37,7 @@ class AddTwigPathsPassSpec extends ObjectBehavior
 
     function it_processes(ContainerBuilder $container, Definition $coordinator)
     {
+        $container->getParameter('takeit_amp_html.configuration.enabled')->willReturn(true);
         $container->getParameter('kernel.bundles')->willReturn(['TwigBundle' => true]);
         $container->getDefinition('twig.loader.filesystem')->shouldBeCalled()->willreturn($coordinator);
         $container->getParameter('takeit_amp_html.configuration.theme.themes_path')

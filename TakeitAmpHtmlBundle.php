@@ -14,6 +14,7 @@ namespace Takeit\Bundle\AmpHtmlBundle;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 use Takeit\Bundle\AmpHtmlBundle\DependencyInjection\Compiler\AddTwigPathsPass;
+use Takeit\Bundle\AmpHtmlBundle\DependencyInjection\Compiler\RegisterAmpLoaderPass;
 
 /**
  * Class TakeitAmpHtmlBundle.

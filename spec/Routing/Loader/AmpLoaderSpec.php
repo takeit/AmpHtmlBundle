@@ -30,12 +30,11 @@ class AmpLoaderSpec extends ObjectBehavior
         $this->parameters = [
             'pattern' => '{some}/{pattern}',
             'prefix' => '/some/prefix',
-            'controller' => 'controller_service_id',
             'parameter' => 'slug',
             'parameterRegex' => '.+'
         ];
 
-        $this->beConstructedWith($this->parameters);
+        $this->beConstructedWith($this->parameters, 'controller_service_id');
     }
 
     function it_is_initializable()
@@ -53,7 +52,7 @@ class AmpLoaderSpec extends ObjectBehavior
     function it_should_load_a_resource_without_pattern()
     {
         unset($this->parameters['pattern']);
-        $this->beConstructedWith($this->parameters);
+        $this->beConstructedWith($this->parameters, 'controller_service_id');
 
         $defaults = [
             '_controller' => 'controller_service_id',

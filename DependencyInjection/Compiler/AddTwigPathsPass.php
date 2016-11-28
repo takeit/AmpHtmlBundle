@@ -40,6 +40,10 @@ class AddTwigPathsPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
+        if (!$container->getParameter('takeit_amp_html.configuration.enabled')) {
+            return;
+        }
+
         $bundles = $container->getParameter('kernel.bundles');
         if (!isset($bundles['TwigBundle'])) {
             throw new \RuntimeException(

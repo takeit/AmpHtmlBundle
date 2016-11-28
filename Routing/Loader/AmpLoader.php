@@ -33,11 +33,18 @@ class AmpLoader extends Loader
     private $parameters;
 
     /**
-     * @param array $parameters
+     * @var string
      */
-    public function __construct(array $parameters)
+    private $controller;
+
+    /**
+     * @param array  $parameters
+     * @param string $controller
+     */
+    public function __construct(array $parameters, $controller)
     {
         $this->parameters = $parameters;
+        $this->controller = $controller;
     }
 
     /**
@@ -49,7 +56,6 @@ class AmpLoader extends Loader
             throw new \RuntimeException('Do not add the "amp" loader twice');
         }
 
-        $routes = new RouteCollection();
         $path = sprintf('%s/{%s}', $this->parameters['prefix'], $this->parameters['parameter']);
         if (isset($this->parameters['pattern']) && null !== $this->parameters['pattern']) {
             $path = sprintf(
@@ -61,7 +67,7 @@ class AmpLoader extends Loader
         }
 
         $defaults = array(
-            '_controller' => $this->parameters['controller'],
+            '_controller' => $this->controller,
             '_amp_route' => true,
         );
 
@@ -69,6 +75,7 @@ class AmpLoader extends Loader
             $this->parameters['parameter'] => $this->parameters['parameterRegex'],
         );
 
+        $routes = new RouteCollection();
         $routes->add('takeit_amp_html_view', new Route($path, $defaults, $requirements));
         $this->loaded = true;
 

@@ -30,8 +30,20 @@ class TakeitAmpHtmlExtension extends Extension
     {
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
+        $container->setParameter('takeit_amp_html.configuration.enabled', $config['enabled']);
+
+        if (!$config['enabled']) {
+            return;
+        }
 
         $loader = new YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
+
+        if ($config['routing']['parameter_strategy']['enabled']) {
+            $loader->load('parameter_strategy.yml');
+        } else {
+            $container->setParameter($this->getAlias().'.configuration.routing.route_strategy', $config['routing']['route_strategy']);
+            $loader->load('route_strategy.yml');
+        }
 
         $container->setAlias('takeit_amp_html.converter.amp', $config['converter']);
         $loader->load('converters.yml');
@@ -50,6 +62,6 @@ class TakeitAmpHtmlExtension extends Extension
         );
 
         $container->setParameter($this->getAlias().'.configuration.model.class', $config['model']);
-        $container->setParameter($this->getAlias().'.configuration.routing', $config['routing']);
+        $container->setParameter($this->getAlias().'.configuration.routing.controller', $config['routing']['controller']);
     }
 }
