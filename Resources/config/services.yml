@@ -16,9 +16,10 @@ services:
       class: Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportChecker
       public: false
 
-#    takeit_amp_html.twig_extension:
-#        class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
-#        public: false
-#        arguments: ['%takeit_amp_html.configuration.routing.route_strategy%']
-#        tags:
-#            - { name: twig.extension }
+    takeit_amp_html.twig_extension:
+        class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
+        public: false
+        arguments:
+            - '@takeit_amp_html.amp_url_generator'
+        tags:
+            - { name: twig.extension }

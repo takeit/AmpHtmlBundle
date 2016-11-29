@@ -11,22 +11,24 @@
 
 namespace Takeit\Bundle\AmpHtmlBundle\Twig;
 
+use Takeit\Bundle\AmpHtmlBundle\Generator\AmpUrlGeneratorInterface;
+
 /**
  * AMP Twig Extension.
  */
 class AmpExtension extends \Twig_Extension
 {
     /**
-     * @var array
+     * @var AmpUrlGeneratorInterface
      */
-    private $config;
+    private $ampUrlGenerator;
 
     /**
-     * @param array $config
+     * @param AmpUrlGeneratorInterface $ampUrlGenerator
      */
-    public function __construct(array $config)
+    public function __construct(AmpUrlGeneratorInterface $ampUrlGenerator)
     {
-        $this->config = $config;
+        $this->ampUrlGenerator = $ampUrlGenerator;
     }
 
     /**
@@ -35,20 +37,20 @@ class AmpExtension extends \Twig_Extension
     public function getFilters()
     {
         return array(
-            new \Twig_SimpleFilter('amp_path', array($this, 'ampFilter')),
+            new \Twig_SimpleFilter('amp', array($this, 'ampFilter')),
         );
     }
 
     /**
-     * Returns an AMP path.
+     * Returns an AMP URL.
      *
-     * @param $path Path
+     * @param $url URL
      *
      * @return string
      */
-    public function ampFilter($path)
+    public function ampFilter($url)
     {
-        return $this->config['prefix'].$path;
+        return $this->ampUrlGenerator->generate($url);
     }
 
     /**

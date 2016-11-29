@@ -80,7 +80,6 @@ class Configuration implements ConfigurationInterface
                         ->scalarNode('controller')
                             ->defaultValue('takeit_amp_html.amp_controller:viewAction')
                         ->end()
-
                     ->end()
                 ->end()
                 ->scalarNode('model')

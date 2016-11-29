@@ -12,6 +12,7 @@
 namespace spec\Takeit\Bundle\AmpHtmlBundle\Twig;
 
 use PhpSpec\ObjectBehavior;
+use Takeit\Bundle\AmpHtmlBundle\Generator\AmpUrlGeneratorInterface;
 use Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension;
 
 /**
@@ -21,9 +22,9 @@ use Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension;
  */
 class AmpExtensionSpec extends ObjectBehavior
 {
-    function let()
+    function let(AmpUrlGeneratorInterface $ampUrlGenerator)
     {
-        $this->beConstructedWith(['prefix' => '/some/prefix']);
+        $this->beConstructedWith($ampUrlGenerator);
     }
 
     function it_is_initializable()

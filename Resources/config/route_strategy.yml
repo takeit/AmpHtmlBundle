@@ -18,3 +18,8 @@ services:
         tags:
             - { name: routing.loader }
 
+    takeit_amp_html.amp_route_url_generator:
+        class: Takeit\Bundle\AmpHtmlBundle\Generator\RouteUrlGenerator
+
+    takeit_amp_html.amp_url_generator:
+        alias: takeit_amp_html.amp_route_url_generator
