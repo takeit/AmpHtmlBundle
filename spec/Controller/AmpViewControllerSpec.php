@@ -23,7 +23,7 @@ use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
  *
  * @author Rafał Muszyński <rmuszynski1@gmail.com>
  */
-class AmpViewControllerSpec extends ObjectBehavior
+final class AmpViewControllerSpec extends ObjectBehavior
 {
     function let(\Twig_Environment $twig, AmpConverterInterface $converter)
     {
@@ -35,15 +35,19 @@ class AmpViewControllerSpec extends ObjectBehavior
         $this->shouldHaveType(AmpViewController::class);
     }
     
-    function it_should_render_amp_template(AmpInterface $ampObject, $twig, AmpConverterInterface $converter)
-    {
-        $converter->convertToAmp('<html><body>test html</body></html>')->willReturn('amp converter html');
+    function it_should_render_amp_template(
+        AmpInterface $ampObject,
+        \Twig_Environment $twig,
+        AmpConverterInterface $converter
+    ) {
         $twig->render(Argument::exact('@amp_theme/index.html.twig'), [
             'object' => $ampObject,
         ])->willReturn('<html><body>test html</body></html>');
 
+        $converter->convertToAmp('<html><body>test html</body></html>')->willReturn('amp html content');
+
         $response = $this->viewAction($ampObject);
         $response->shouldBeAnInstanceOf(Response::class);
-        $response->getContent()->shouldBe('amp converter html');
+        $response->getContent()->shouldBe('amp html content');
     }
 }

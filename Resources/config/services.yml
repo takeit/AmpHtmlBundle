@@ -12,6 +12,10 @@ services:
             - {'Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface': "%takeit_amp_html.configuration.model.class%"}
             - '@?doctrine'
 
+    takeit_amp_html.checker.default:
+      class: Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportChecker
+      public: false
+
 #    takeit_amp_html.twig_extension:
 #        class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
 #        public: false

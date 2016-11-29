@@ -45,6 +45,7 @@ class TakeitAmpHtmlExtension extends Extension
             $loader->load('route_strategy.yml');
         }
 
+        $container->setAlias('takeit_amp_html.checker', $config['checker']);
         $container->setAlias('takeit_amp_html.converter.amp', $config['converter']);
         $loader->load('converters.yml');
         $loader->load('services.yml');

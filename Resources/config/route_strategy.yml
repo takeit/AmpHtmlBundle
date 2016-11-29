@@ -11,7 +11,10 @@ services:
     takeit_amp_html.routing_loader:
         class: Takeit\Bundle\AmpHtmlBundle\Routing\Loader\AmpLoader
         public: false
-        arguments: ['%takeit_amp_html.configuration.routing.route_strategy%', '%takeit_amp_html.configuration.routing.controller%']
+        arguments:
+            - '@takeit_amp_html.checker'
+            - '%takeit_amp_html.configuration.routing.route_strategy%'
+            - '%takeit_amp_html.configuration.routing.controller%'
         tags:
             - { name: routing.loader }
 

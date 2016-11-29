@@ -13,27 +13,38 @@ namespace Takeit\Bundle\AmpHtmlBundle\EventListener;
 
 use Symfony\Component\HttpKernel\Controller\ControllerResolverInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
+use Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportCheckerInterface;
 
 final class AmpRouteListener
 {
+    /**
+     * @var AmpSupportCheckerInterface
+     */
+    private $checker;
+
     /**
      * @var ControllerResolverInterface
      */
     private $controllerResolver;
 
     /**
-     * @var string
+     * @var array
      */
     private $controller;
 
     /**
      * AmpRouteListener constructor.
      *
+     * @param AmpSupportCheckerInterface  $checker
      * @param ControllerResolverInterface $controllerResolver
-     * @param string                      $controller
+     * @param $controller
      */
-    public function __construct(ControllerResolverInterface $controllerResolver, $controller)
-    {
+    public function __construct(
+        AmpSupportCheckerInterface $checker,
+        ControllerResolverInterface $controllerResolver,
+        $controller
+    ) {
+        $this->checker = $checker;
         $this->controllerResolver = $controllerResolver;
         $this->controller = $controller;
     }
@@ -45,9 +56,14 @@ final class AmpRouteListener
     {
         $request = $event->getRequest();
 
-        if ($request->query->has('amp')) {
+        if ($request->query->has('amp') && !$request->isXmlHttpRequest() && $this->checker->isEnabled()) {
             $request->attributes->set('_controller', $this->controller);
-            $event->setController($this->controllerResolver->getController($request));
+            $controller = $this->controllerResolver->getController($request);
+            if (!$controller) {
+                throw new \LogicException('Controller can not be determined!');
+            }
+
+            $event->setController($controller);
         }
     }
 }
