@@ -63,7 +63,7 @@ class AmpViewController
         $this->themeLoader->load();
 
         $response = new Response();
-        $content = $this->twig->render(sprintf('@%s/index.html.twig', ThemeLoaderInterface::NAMESPACE), [
+        $content = $this->twig->render(sprintf('@%s/index.html.twig', ThemeLoaderInterface::THEME_NAMESPACE), [
             'object' => $object,
         ]);
 

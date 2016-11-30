@@ -38,6 +38,6 @@ final class ThemeLoader implements ThemeLoaderInterface
      */
     public function load()
     {
-        $this->filesystem->addPath($this->themePath, ThemeLoaderInterface::NAMESPACE);
+        $this->filesystem->addPath($this->themePath, ThemeLoaderInterface::THEME_NAMESPACE);
     }
 }

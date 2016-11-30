@@ -13,7 +13,7 @@ namespace Takeit\Bundle\AmpHtmlBundle\Loader;
 
 interface ThemeLoaderInterface
 {
-    const NAMESPACE = 'amp_theme';
+    const THEME_NAMESPACE = 'amp_theme';
 
     public function load();
 }
