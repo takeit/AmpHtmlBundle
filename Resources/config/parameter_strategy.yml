@@ -1,0 +1,15 @@
+services:
+    takeit_amp_html.amp_route_listener:
+        class: Takeit\Bundle\AmpHtmlBundle\EventListener\AmpRouteListener
+        arguments:
+            - '@takeit_amp_html.checker'
+            - '@controller_resolver'
+            - '%takeit_amp_html.configuration.routing.controller%'
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onKernelController }
+
+    takeit_amp_html.amp_parameter_url_generator:
+      class: Takeit\Bundle\AmpHtmlBundle\Generator\ParameterUrlGenerator
+
+    takeit_amp_html.amp_url_generator:
+      alias: takeit_amp_html.amp_parameter_url_generator

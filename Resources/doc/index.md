@@ -43,28 +43,22 @@ class AppKernel extends Kernel
 }
 ```
 
-### Step 3: Enable routing
-
-To be able to generate AMP HTML view under the specific route, 
-the routing configuration needs to be provided:
-
-```yml
-# app/config/routing.yml
-takeit_amphtml:
-    resource: .
-    type: amp
-```
-
-### Step 4: Configure the Bundle
+### Step 3: Configure the Bundle
 
 In order to use this bundle, some configuration is required.
 
-- provide `current_theme` name, the name of your theme for AMP HTML format.
 - provide `model` fully qualified class name, the class which should be AMP-ified.
-- specify route pattern, depending on your current routing.
+- choose the strategy on how the AMP HTML should be handled 
+
+#### Route Strategy:
+
+Route strategy lets you handle AMP HTML via separate route designed to handle AMP-ified content.
 
 For example, if your articles are accessible under `/pl/blog/posts/nulla-porta-lobortis-ligula-vel-egestas` route,
 you need to specify the following pattern: e.g.`{_locale}/{controller}/{action}`.
+
+In this case AMP HTML version of your article will be accessible using:
+`/platform/amp/pl/blog/posts/nulla-porta-lobortis-ligula-vel-egestas` URL.
 
  > **Note:**
  > By default, the articles are searchable via slug. 
@@ -76,14 +70,34 @@ The example configuration should look like below:
 ```yml
 # app/config/config*.yml
 takeit_amp_html:
+    model: AppBundle\Entity\Post
+    routing:
+        route_strategy:
+            pattern: "{_locale}/{controller}/{action}"
+```
+
+#### Parameter Strategy:
+
+This strategy doesn't add any new route to handle AMP HTML version of your articles/posts. Instead, it uses `amp` query parameter to determine whether to load article in AMP HTML format or not.
+
+For example, if your articles are accessible under `/pl/blog/posts/nulla-porta-lobortis-ligula-vel-egestas` route, your AMP HTML version can be found by adding `?amp` parameter to the URL: `/pl/blog/posts/nulla-porta-lobortis-ligula-vel-egestas?amp`.
+
+`/pl/blog/posts/nulla-porta-lobortis-ligula-vel-egestas?param=1&amp` will also work fine.
+
+To make use of Parameter Strategy, use this configuration:
+
+```yml
+# app/config/config*.yml
+takeit_amp_html:
     theme:
         current_theme: "amp-theme"
     model: AppBundle\Entity\Post
     routing:
-        pattern: "{_locale}/{controller}/{action}"
+        parameter_strategy:
+            enabled: true
 ```
 
-### Step 5: Implement AmpInterface
+### Step 4: Implement AmpInterface
 
 In order to convert your articles to AMP HTML format, your model's class needs to implement `AmpInterface`.
 
@@ -102,14 +116,37 @@ class Post implements AmpInterface
 }
 ```
 
-### Step 6: Download and install the demo theme.
+### Step 5: Download and install the demo theme.
 
 Create a new directory `app/Resources/amp/`, download the [demo theme](https://github.com/takeit/amp-theme) and copy it into the newly created directory, name its folder: `amp-theme`.
 
-### Step 7: That's it!
+### Step 6: That's it!
 
 Go to, for example. http://example.com/platform/amp/pl/blog/posts/nulla-porta-lobortis-ligula-vel-egestas
 and see your AMP HTML page!
+
+Twig extension
+--------------
+
+To generate URL to an article (based on configured strategy) in AMP HTML format from Twig, just use `amp` Twig filter provided by this bundle:
+
+```twig
+{{ path(article)|amp }}
+```
+
+Theme Loader
+------------
+
+Theme loader is used to load theme from different sources. By default Twig filesystem loader is used which loads templates from configured directory.
+
+By default, if `theme_path` is provided under `theme` node in bundle's config, it will load it directly from that directory.
+
+You have the possibility to provide your own loader service in bundle's config if you wish to have custom logic. For example, it can be useful if you want to load theme from directory which changed dynamically based on current business logic.
+
+AMP HTML Support Checker
+------------------------
+
+This service is used to check whether AMP HTML support should be enabled or disabled. By default it is enabled. You may need to have the possibility to disable or enable AMP HTML support dynamically using API etc. This service helps you to easily manage that.
 
 Reference Configuration
 -----------------------
@@ -118,13 +155,17 @@ Reference Configuration
 # app/config/config*.yml
 takeit_amp_html:
     theme:
-        path: "%kernel.root_dir%/Resources/amp/themes"
-        current_theme: "amp-theme"
+        loader: 'takeit_amp_html.loader.theme.default'
+        theme_path: "%kernel.root_dir%/Resources/amp/themes/amp-theme"
     model: AppBundle\Entity\Post
+    checker: 'takeit_amp_html.checker.default'
     routing:
-        pattern: "{_locale}/{controller}/{action}"
         controller: "takeit_amp_html.amp_controller:viewAction"
-        prefix: "/platform/amp"
-        parameter: "slug"
-        parameterRegex: ".+"
+        route_strategy:
+            pattern: "{_locale}/{controller}/{action}"
+            prefix: "/platform/amp"
+            parameter: "slug"
+            parameterRegex: ".+"
+         parameter_strategy:
+            enabled: true
 ```

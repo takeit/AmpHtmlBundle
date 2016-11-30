@@ -15,6 +15,8 @@ use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Response;
 use Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController;
+use Takeit\Bundle\AmpHtmlBundle\Converter\AmpConverterInterface;
+use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoaderInterface;
 use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
 
 /**
@@ -22,11 +24,11 @@ use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
  *
  * @author Rafał Muszyński <rmuszynski1@gmail.com>
  */
-class AmpViewControllerSpec extends ObjectBehavior
+final class AmpViewControllerSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig)
+    function let(\Twig_Environment $twig, AmpConverterInterface $converter, ThemeLoaderInterface $themeLoader)
     {
-        $this->beConstructedWith($twig);
+        $this->beConstructedWith($twig, $converter, $themeLoader);
     }
 
     function it_is_initializable()
@@ -34,14 +36,21 @@ class AmpViewControllerSpec extends ObjectBehavior
         $this->shouldHaveType(AmpViewController::class);
     }
     
-    function it_should_render_amp_template(AmpInterface $ampObject, $twig)
-    {
+    function it_should_render_amp_template(
+        AmpInterface $ampObject,
+        \Twig_Environment $twig,
+        AmpConverterInterface $converter,
+        ThemeLoaderInterface $themeLoader
+    ) {
+        $themeLoader->load();
         $twig->render(Argument::exact('@amp_theme/index.html.twig'), [
             'object' => $ampObject,
         ])->willReturn('<html><body>test html</body></html>');
 
+        $converter->convertToAmp('<html><body>test html</body></html>')->willReturn('amp html content');
+
         $response = $this->viewAction($ampObject);
         $response->shouldBeAnInstanceOf(Response::class);
-        $response->getContent()->shouldBe('<html><body>test html</body></html>');
+        $response->getContent()->shouldBe('amp html content');
     }
 }

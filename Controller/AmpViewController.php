@@ -12,6 +12,8 @@
 namespace Takeit\Bundle\AmpHtmlBundle\Controller;
 
 use Symfony\Component\HttpFoundation\Response;
+use Takeit\Bundle\AmpHtmlBundle\Converter\AmpConverterInterface;
+use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoaderInterface;
 use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
 
 /**
@@ -27,11 +29,28 @@ class AmpViewController
     private $twig;
 
     /**
-     * @param \Twig_environment $twig
+     * @var AmpConverterInterface
      */
-    public function __construct(\Twig_environment $twig)
-    {
+    private $converter;
+
+    /**
+     * @var ThemeLoaderInterface
+     */
+    private $themeLoader;
+
+    /**
+     * @param \Twig_Environment     $twig
+     * @param AmpConverterInterface $converter
+     * @param ThemeLoaderInterface  $themeLoader
+     */
+    public function __construct(
+        \Twig_Environment $twig,
+        AmpConverterInterface $converter,
+        ThemeLoaderInterface $themeLoader
+    ) {
         $this->twig = $twig;
+        $this->converter = $converter;
+        $this->themeLoader = $themeLoader;
     }
 
     /**
@@ -41,10 +60,14 @@ class AmpViewController
      */
     public function viewAction(AmpInterface $object)
     {
+        $this->themeLoader->load();
+
         $response = new Response();
-        $response->setContent($this->twig->render(sprintf('@amp_theme/index.html.twig'), [
+        $content = $this->twig->render(sprintf('@%s/index.html.twig', ThemeLoaderInterface::THEME_NAMESPACE), [
             'object' => $object,
-        ]));
+        ]);
+
+        $response->setContent($this->converter->convertToAmp($content));
 
         return $response;
     }

@@ -14,6 +14,7 @@ namespace spec\Takeit\Bundle\AmpHtmlBundle\Routing\Loader;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportCheckerInterface;
 use Takeit\Bundle\AmpHtmlBundle\Routing\Loader\AmpLoader;
 
 /**
@@ -25,17 +26,16 @@ class AmpLoaderSpec extends ObjectBehavior
 {
     private $parameters;
 
-    function let()
+    function let(AmpSupportCheckerInterface $checker)
     {
         $this->parameters = [
             'pattern' => '{some}/{pattern}',
             'prefix' => '/some/prefix',
-            'controller' => 'controller_service_id',
             'parameter' => 'slug',
             'parameterRegex' => '.+'
         ];
 
-        $this->beConstructedWith($this->parameters);
+        $this->beConstructedWith($checker, $this->parameters, 'controller_service_id');
     }
 
     function it_is_initializable()
@@ -43,17 +43,20 @@ class AmpLoaderSpec extends ObjectBehavior
         $this->shouldHaveType(AmpLoader::class);
     }
 
-    function it_should_load_a_resource()
+    function it_should_load_a_resource(AmpSupportCheckerInterface $checker)
     {
+        $checker->isEnabled()->willReturn(true);
         $routes = $this->getRoutes();
 
         $this->load('resource', 'type')->shouldBeLike($routes);
     }
 
-    function it_should_load_a_resource_without_pattern()
+    function it_should_load_a_resource_without_pattern(AmpSupportCheckerInterface $checker)
     {
         unset($this->parameters['pattern']);
-        $this->beConstructedWith($this->parameters);
+        $this->beConstructedWith($checker, $this->parameters, 'controller_service_id');
+
+        $checker->isEnabled()->willReturn(true);
 
         $defaults = [
             '_controller' => 'controller_service_id',
@@ -71,9 +74,10 @@ class AmpLoaderSpec extends ObjectBehavior
         $this->load('resource', 'type')->shouldBeLike($routes);
     }
 
-    function it_should_throw_an_exception_when_loading_loader_twice()
+    function it_should_throw_an_exception_when_loading_loader_twice(AmpSupportCheckerInterface $checker)
     {
         $routes = $this->getRoutes();
+        $checker->isEnabled()->willReturn(true);
 
         $this->load('resource', 'type')->shouldBeLike($routes);
 

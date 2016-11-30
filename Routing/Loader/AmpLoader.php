@@ -14,6 +14,7 @@ namespace Takeit\Bundle\AmpHtmlBundle\Routing\Loader;
 use Symfony\Component\Config\Loader\Loader;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
+use Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportCheckerInterface;
 
 /**
  * AMP HTML Route Loader.
@@ -28,16 +29,30 @@ class AmpLoader extends Loader
     private $loaded = false;
 
     /**
+     * @var AmpSupportCheckerInterface
+     */
+    private $checker;
+
+    /**
      * @var array
      */
     private $parameters;
 
     /**
-     * @param array $parameters
+     * @var string
      */
-    public function __construct(array $parameters)
+    private $controller;
+
+    /**
+     * @param AmpSupportCheckerInterface $checker
+     * @param array                      $parameters
+     * @param string                     $controller
+     */
+    public function __construct(AmpSupportCheckerInterface $checker, array $parameters, $controller)
     {
+        $this->checker = $checker;
         $this->parameters = $parameters;
+        $this->controller = $controller;
     }
 
     /**
@@ -50,6 +65,11 @@ class AmpLoader extends Loader
         }
 
         $routes = new RouteCollection();
+
+        if (!$this->checker->isEnabled()) {
+            return $routes;
+        }
+
         $path = sprintf('%s/{%s}', $this->parameters['prefix'], $this->parameters['parameter']);
         if (isset($this->parameters['pattern']) && null !== $this->parameters['pattern']) {
             $path = sprintf(
@@ -61,7 +81,7 @@ class AmpLoader extends Loader
         }
 
         $defaults = array(
-            '_controller' => $this->parameters['controller'],
+            '_controller' => $this->controller,
             '_amp_route' => true,
         );
 

@@ -1,40 +1,31 @@
-parameters:
-    takeit_amp_html.amp_subscriber.class: Takeit\Bundle\AmpHtmlBundle\EventListener\AmpResponseSubscriber
-    takeit_amp_html.amp_controller.class: Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController
-    takeit_amp_html.routing_loader.class: Takeit\Bundle\AmpHtmlBundle\Routing\Loader\AmpLoader
-    takeit_amp_html.param_converter.resolve_entity_converter.class: Takeit\Bundle\AmpHtmlBundle\Request\ParamConverter\ResolveEntityParamConverter
-    takeit_amp_html.twig_extension.class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
-
 services:
-    takeit_amp_html.amp_subscriber:
-        class: "%takeit_amp_html.amp_subscriber.class%"
-        arguments: ["@takeit_amp_html.converter.amp"]
-        tags:
-            - { name: kernel.event_subscriber, priority: 30 }
-
     takeit_amp_html.amp_controller:
-        class: "%takeit_amp_html.amp_controller.class%"
-        arguments: ["@twig"]
-
-    takeit_amp_html.routing_loader:
-        class: "%takeit_amp_html.routing_loader.class%"
-        public: false
-        arguments: ["%takeit_amp_html.configuration.routing%"]
-        tags:
-            - { name: routing.loader }
+        class: Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController
+        arguments: ['@twig', '@takeit_amp_html.amp_converter', '@takeit_amp_html.loader.theme']
 
     takeit_amp_html.param_converter.resolve_entity_converter:
-        class: "%takeit_amp_html.param_converter.resolve_entity_converter.class%"
+        class: Takeit\Bundle\AmpHtmlBundle\Request\ParamConverter\ResolveEntityParamConverter
         public: false
         tags:
             - { name: request.param_converter, priority: 10, converter: doctrine.orm }
         arguments:
             - {'Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface': "%takeit_amp_html.configuration.model.class%"}
-            - "@?doctrine"
+            - '@?doctrine'
+
+    takeit_amp_html.checker.default:
+      class: Takeit\Bundle\AmpHtmlBundle\Checker\AmpSupportChecker
+      public: false
 
     takeit_amp_html.twig_extension:
-        class: "%takeit_amp_html.twig_extension.class%"
+        class: Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension
         public: false
-        arguments: ['%takeit_amp_html.configuration.routing%']
+        arguments:
+            - '@takeit_amp_html.amp_url_generator'
         tags:
             - { name: twig.extension }
+
+    takeit_amp_html.loader.theme.default:
+        class: Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoader
+        arguments:
+            - '@twig.loader.filesystem'
+            - '%takeit_amp_html.configuration.theme.theme_path%'

@@ -1,0 +1,25 @@
+services:
+    takeit_amp_html.delegating_loader:
+        class: Takeit\Bundle\AmpHtmlBundle\Routing\Loader\DelegatingLoader
+        arguments:
+            - '@controller_name_converter'
+            - '@routing.resolver'
+
+    routing.loader:
+        alias: takeit_amp_html.delegating_loader
+
+    takeit_amp_html.routing_loader:
+        class: Takeit\Bundle\AmpHtmlBundle\Routing\Loader\AmpLoader
+        public: false
+        arguments:
+            - '@takeit_amp_html.checker'
+            - '%takeit_amp_html.configuration.routing.route_strategy%'
+            - '%takeit_amp_html.configuration.routing.controller%'
+        tags:
+            - { name: routing.loader }
+
+    takeit_amp_html.amp_route_url_generator:
+        class: Takeit\Bundle\AmpHtmlBundle\Generator\RouteUrlGenerator
+
+    takeit_amp_html.amp_url_generator:
+        alias: takeit_amp_html.amp_route_url_generator

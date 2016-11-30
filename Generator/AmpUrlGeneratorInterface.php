@@ -9,15 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Takeit\Bundle\AmpHtmlBundle;
+namespace Takeit\Bundle\AmpHtmlBundle\Generator;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-/**
- * Class TakeitAmpHtmlBundle.
- *
- * @author Rafał Muszyński <rmuszynski1@gmail.com>
- */
-class TakeitAmpHtmlBundle extends Bundle
+interface AmpUrlGeneratorInterface
 {
+    /**
+     * @param string $url
+     *
+     * @return string
+     */
+    public function generate($url);
 }
