@@ -47,7 +47,6 @@ class AppKernel extends Kernel
 
 In order to use this bundle, some configuration is required.
 
-- provide `current_theme` name, the name of your theme for AMP HTML format.
 - provide `model` fully qualified class name, the class which should be AMP-ified.
 - choose the strategy on how the AMP HTML should be handled 
 
@@ -71,8 +70,6 @@ The example configuration should look like below:
 ```yml
 # app/config/config*.yml
 takeit_amp_html:
-    theme:
-        current_theme: "amp-theme"
     model: AppBundle\Entity\Post
     routing:
         route_strategy:
@@ -137,6 +134,20 @@ To generate URL to an article (based on configured strategy) in AMP HTML format 
 {{ path(article)|amp }}
 ```
 
+Theme Loader
+------------
+
+Theme loader is used to load theme from different sources. By default Twig filesystem loader is used which loads templates from configured directory.
+
+By default, if `theme_path` is provided under `theme` node in bundle's config, it will load it directly from that directory.
+
+You have the possibility to provide your own loader service in bundle's config if you wish to have custom logic. For example, it can be useful if you want to load theme from directory which changed dynamically based on current business logic.
+
+AMP HTML Support Checker
+------------------------
+
+This service is used to check whether AMP HTML support should be enabled or disabled. By default it is enabled. You may need to have the possibility to disable or enable AMP HTML support dynamically using API etc. This service helps you to easily manage that.
+
 Reference Configuration
 -----------------------
 
@@ -144,9 +155,10 @@ Reference Configuration
 # app/config/config*.yml
 takeit_amp_html:
     theme:
-        path: "%kernel.root_dir%/Resources/amp/themes"
-        current_theme: "amp-theme"
+        loader: 'takeit_amp_html.loader.theme.default'
+        theme_path: "%kernel.root_dir%/Resources/amp/themes/amp-theme"
     model: AppBundle\Entity\Post
+    checker: 'takeit_amp_html.checker.default'
     routing:
         controller: "takeit_amp_html.amp_controller:viewAction"
         route_strategy:

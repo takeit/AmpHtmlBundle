@@ -16,6 +16,7 @@ use Prophecy\Argument;
 use Symfony\Component\HttpFoundation\Response;
 use Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController;
 use Takeit\Bundle\AmpHtmlBundle\Converter\AmpConverterInterface;
+use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoaderInterface;
 use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
 
 /**
@@ -25,9 +26,9 @@ use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
  */
 final class AmpViewControllerSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig, AmpConverterInterface $converter)
+    function let(\Twig_Environment $twig, AmpConverterInterface $converter, ThemeLoaderInterface $themeLoader)
     {
-        $this->beConstructedWith($twig, $converter);
+        $this->beConstructedWith($twig, $converter, $themeLoader);
     }
 
     function it_is_initializable()
@@ -38,8 +39,10 @@ final class AmpViewControllerSpec extends ObjectBehavior
     function it_should_render_amp_template(
         AmpInterface $ampObject,
         \Twig_Environment $twig,
-        AmpConverterInterface $converter
+        AmpConverterInterface $converter,
+        ThemeLoaderInterface $themeLoader
     ) {
+        $themeLoader->load();
         $twig->render(Argument::exact('@amp_theme/index.html.twig'), [
             'object' => $ampObject,
         ])->willReturn('<html><body>test html</body></html>');

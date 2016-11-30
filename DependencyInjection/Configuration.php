@@ -33,15 +33,14 @@ class Configuration implements ConfigurationInterface
             ->addDefaultsIfNotSet()
             ->children()
                 ->arrayNode('theme')
-                    ->isRequired()
                     ->addDefaultsIfNotSet()
                     ->children()
-                        ->scalarNode('themes_path')
-                            ->defaultValue('%kernel.root_dir%/Resources/amp')
-                        ->end()
-                        ->scalarNode('current_theme')
+                        ->scalarNode('loader')
+                            ->defaultValue('takeit_amp_html.loader.theme.default')
                             ->cannotBeEmpty()
-                            ->isRequired()
+                        ->end()
+                        ->scalarNode('theme_path')
+                            ->defaultValue('%kernel.root_dir%/Resources/amp/amp-theme')
                         ->end()
                     ->end()
                 ->end()
@@ -97,4 +96,3 @@ class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 }
-

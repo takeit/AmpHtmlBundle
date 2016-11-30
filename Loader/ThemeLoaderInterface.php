@@ -9,15 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Takeit\Bundle\AmpHtmlBundle;
+namespace Takeit\Bundle\AmpHtmlBundle\Loader;
 
-use Symfony\Component\HttpKernel\Bundle\Bundle;
-
-/**
- * Class TakeitAmpHtmlBundle.
- *
- * @author Rafał Muszyński <rmuszynski1@gmail.com>
- */
-class TakeitAmpHtmlBundle extends Bundle
+interface ThemeLoaderInterface
 {
+    const NAMESPACE = 'amp_theme';
+
+    public function load();
 }

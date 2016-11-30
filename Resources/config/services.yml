@@ -1,7 +1,7 @@
 services:
     takeit_amp_html.amp_controller:
         class: Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController
-        arguments: ['@twig', '@takeit_amp_html.amp_converter']
+        arguments: ['@twig', '@takeit_amp_html.amp_converter', '@takeit_amp_html.loader.theme']
 
     takeit_amp_html.param_converter.resolve_entity_converter:
         class: Takeit\Bundle\AmpHtmlBundle\Request\ParamConverter\ResolveEntityParamConverter
@@ -23,3 +23,9 @@ services:
             - '@takeit_amp_html.amp_url_generator'
         tags:
             - { name: twig.extension }
+
+    takeit_amp_html.loader.theme.default:
+        class: Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoader
+        arguments:
+            - '@twig.loader.filesystem'
+            - '%takeit_amp_html.configuration.theme.theme_path%'

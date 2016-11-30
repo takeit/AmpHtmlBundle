@@ -47,20 +47,17 @@ class TakeitAmpHtmlExtension extends Extension
 
         $container->setAlias('takeit_amp_html.checker', $config['checker']);
         $container->setAlias('takeit_amp_html.converter.amp', $config['converter']);
+        $container->setAlias('takeit_amp_html.loader.theme', $config['theme']['loader']);
         $loader->load('converters.yml');
         $loader->load('services.yml');
 
+        unset($config['theme']['loader']);
         foreach ($config['theme'] as $key => $value) {
             $container->setParameter(
                 $this->getAlias().'.configuration.theme.'.$key,
                 $value
             );
         }
-
-        $container->setParameter(
-            $this->getAlias().'.configuration.theme.theme_path',
-            rtrim($config['theme']['themes_path'], '/').'/'.$config['theme']['current_theme']
-        );
 
         $container->setParameter($this->getAlias().'.configuration.model.class', $config['model']);
         $container->setParameter($this->getAlias().'.configuration.routing.controller', $config['routing']['controller']);
