@@ -51,7 +51,7 @@ class ResolveEntityParamConverter extends DoctrineParamConverter
      */
     public function apply(Request $request, ParamConverter $configuration)
     {
-        parent::apply($request, $this->resolveTargetEntity($configuration));
+        return parent::apply($request, $this->resolveTargetEntity($configuration));
     }
 
     /**
@@ -63,7 +63,7 @@ class ResolveEntityParamConverter extends DoctrineParamConverter
             return false;
         }
 
-        parent::supports($this->resolveTargetEntity($configuration));
+        return parent::supports($this->resolveTargetEntity($configuration));
     }
 
     /**
