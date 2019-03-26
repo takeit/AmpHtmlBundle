@@ -2,6 +2,7 @@ services:
     takeit_amp_html.amp_controller:
         class: Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController
         arguments: ['@twig', '@takeit_amp_html.amp_converter', '@takeit_amp_html.loader.theme']
+        public: true
 
     takeit_amp_html.param_converter.resolve_entity_converter:
         class: Takeit\Bundle\AmpHtmlBundle\Request\ParamConverter\ResolveEntityParamConverter
