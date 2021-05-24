@@ -11,10 +11,12 @@
 
 namespace Takeit\Bundle\AmpHtmlBundle\Loader;
 
+use Twig\Loader\FilesystemLoader;
+
 final class ThemeLoader implements ThemeLoaderInterface
 {
     /**
-     * @var \Twig_Loader_Filesystem
+     * @var FilesystemLoader
      */
     private $filesystem;
 
@@ -24,10 +26,10 @@ final class ThemeLoader implements ThemeLoaderInterface
     private $themePath;
 
     /**
-     * @param \Twig_Loader_Filesystem $filesystem
+     * @param FilesystemLoader $filesystem
      * @param $themePath
      */
-    public function __construct(\Twig_Loader_Filesystem $filesystem, $themePath)
+    public function __construct(FilesystemLoader $filesystem, $themePath)
     {
         $this->filesystem = $filesystem;
         $this->themePath = $themePath;

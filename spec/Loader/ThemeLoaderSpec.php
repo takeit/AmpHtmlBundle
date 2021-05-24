@@ -14,13 +14,14 @@ namespace spec\Takeit\Bundle\AmpHtmlBundle\Loader;
 use PhpSpec\ObjectBehavior;
 use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoader;
 use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoaderInterface;
+use Twig\Loader\FilesystemLoader;
 
 /**
  * @mixin ThemeLoader
  */
 final class ThemeLoaderSpec extends ObjectBehavior
 {
-    public function let(\Twig_Loader_Filesystem $filesystem)
+    public function let(FilesystemLoader $filesystem)
     {
         $this->beConstructedWith($filesystem, '/path/to/amp/amp-theme');
     }
@@ -35,7 +36,7 @@ final class ThemeLoaderSpec extends ObjectBehavior
         $this->shouldImplement(ThemeLoaderInterface::class);
     }
 
-    public function it_loads_amp_theme(\Twig_Loader_Filesystem $filesystem)
+    public function it_loads_amp_theme(FilesystemLoader $filesystem)
     {
         $filesystem->addPath('/path/to/amp/amp-theme', 'amp_theme')->shouldBeCalled();
 

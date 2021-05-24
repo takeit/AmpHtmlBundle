@@ -12,14 +12,13 @@
         }
     ],
     "require": {
-        "php": "^7.1",
+        "php": ">=7.4",
         "lullabot/amp": "1.1.*",
-        "symfony/framework-bundle": "^3.4 || ^4.1",
-        "symfony/twig-bundle": "^3.4 || ^4.1"
+        "symfony/framework-bundle": "^5.2",
+        "symfony/twig-bundle": "^5.2"
     },
     "require-dev": {
-        "phpspec/phpspec": "^5.1",
-        "sebastian/comparator": "^3.0"
+        "phpspec/phpspec": "^7.0"
     },
     "autoload": {
         "exclude-from-classmap": [

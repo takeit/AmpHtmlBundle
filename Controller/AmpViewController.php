@@ -15,6 +15,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Takeit\Bundle\AmpHtmlBundle\Converter\AmpConverterInterface;
 use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoaderInterface;
 use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
+use Twig\Environment;
 
 /**
  * Renders AMP HTML compatible template.
@@ -24,7 +25,7 @@ use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
 class AmpViewController
 {
     /**
-     * @var \Twig_environment
+     * @var Environment;
      */
     private $twig;
 
@@ -39,12 +40,12 @@ class AmpViewController
     private $themeLoader;
 
     /**
-     * @param \Twig_Environment     $twig
+     * @param Environment     $twig
      * @param AmpConverterInterface $converter
      * @param ThemeLoaderInterface  $themeLoader
      */
     public function __construct(
-        \Twig_Environment $twig,
+        Environment $twig,
         AmpConverterInterface $converter,
         ThemeLoaderInterface $themeLoader
     ) {

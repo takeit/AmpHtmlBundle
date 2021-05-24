@@ -26,8 +26,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $treeBuilder->root('takeit_amp_html')
+        $treeBuilder = new TreeBuilder('takeit_amp_html');
+        $treeBuilder->getRootNode()
             ->canBeDisabled()
                 ->info('Enable or disable Google AMP HTML support.')
             ->addDefaultsIfNotSet()

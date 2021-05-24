@@ -18,6 +18,7 @@ use Takeit\Bundle\AmpHtmlBundle\Controller\AmpViewController;
 use Takeit\Bundle\AmpHtmlBundle\Converter\AmpConverterInterface;
 use Takeit\Bundle\AmpHtmlBundle\Loader\ThemeLoaderInterface;
 use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
+use Twig\Environment;
 
 /**
  * @mixin AmpViewController
@@ -26,7 +27,7 @@ use Takeit\Bundle\AmpHtmlBundle\Model\AmpInterface;
  */
 final class AmpViewControllerSpec extends ObjectBehavior
 {
-    function let(\Twig_Environment $twig, AmpConverterInterface $converter, ThemeLoaderInterface $themeLoader)
+    function let(Environment $twig, AmpConverterInterface $converter, ThemeLoaderInterface $themeLoader)
     {
         $this->beConstructedWith($twig, $converter, $themeLoader);
     }
@@ -38,7 +39,7 @@ final class AmpViewControllerSpec extends ObjectBehavior
     
     function it_should_render_amp_template(
         AmpInterface $ampObject,
-        \Twig_Environment $twig,
+        Environment $twig,
         AmpConverterInterface $converter,
         ThemeLoaderInterface $themeLoader
     ) {

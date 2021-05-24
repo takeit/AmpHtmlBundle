@@ -14,6 +14,7 @@ namespace spec\Takeit\Bundle\AmpHtmlBundle\Twig;
 use PhpSpec\ObjectBehavior;
 use Takeit\Bundle\AmpHtmlBundle\Generator\AmpUrlGeneratorInterface;
 use Takeit\Bundle\AmpHtmlBundle\Twig\AmpExtension;
+use Twig\Extension\AbstractExtension;
 
 /**
  * @mixin AmpExtension
@@ -34,6 +35,6 @@ class AmpExtensionSpec extends ObjectBehavior
 
     function it_is_a_twig_extension()
     {
-        $this->shouldHaveType('Twig_Extension');
+        $this->shouldHaveType(AbstractExtension::class);
     }
 }
